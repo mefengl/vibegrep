@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""llm-grep: grep, but the search engine is an LLM."""
+"""vibegrep: grep, but the search engine is an LLM."""
 import sys, os, argparse, fnmatch, subprocess, time
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -133,7 +133,7 @@ def fmt_pipe(results):
     for n, line in results[rel]: print(f"{rel}:{n}:{line}")
 
 def main():
-  p = argparse.ArgumentParser(prog="llmgrep", description="grep, but the search engine is an LLM")
+  p = argparse.ArgumentParser(prog="vibegrep", description="grep, but the search engine is an LLM")
   p.add_argument("query"); p.add_argument("path", nargs="?", default=".")
   p.add_argument("--depth", type=int, default=1, choices=[1, 2])
   p.add_argument("-j", "--threads", type=int, default=10)
@@ -142,10 +142,10 @@ def main():
   args = p.parse_args()
 
   if not args.dry_run:
-    api_key, base_url, model = env("LLM_GREP_API_KEY"), env("LLM_GREP_BASE_URL").rstrip("/"), args.model or env("LLM_GREP_MODEL")
+    api_key, base_url, model = env("VIBEGREP_API_KEY"), env("VIBEGREP_BASE_URL").rstrip("/"), args.model or env("VIBEGREP_MODEL")
   else:
-    api_key, base_url = os.environ.get("LLM_GREP_API_KEY", ""), os.environ.get("LLM_GREP_BASE_URL", "")
-    model = args.model or os.environ.get("LLM_GREP_MODEL", "unknown")
+    api_key, base_url = os.environ.get("VIBEGREP_API_KEY", ""), os.environ.get("VIBEGREP_BASE_URL", "")
+    model = args.model or os.environ.get("VIBEGREP_MODEL", "unknown")
 
   root = Path(args.path).resolve()
   if not root.exists(): print(f"Error: path '{args.path}' does not exist", file=sys.stderr); sys.exit(2)

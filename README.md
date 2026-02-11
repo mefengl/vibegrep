@@ -1,27 +1,27 @@
-# llmgrep
+# vibegrep
 
 grep, but the search engine is an LLM.
 
 ## Install
 
 ```bash
-pip install llmgrep-cli
+pip install vibegrep  # or: uvx vibegrep
 ```
 
 ## Setup
 
 ```bash
-export LLM_GREP_API_KEY=<your-api-key>
-export LLM_GREP_BASE_URL=https://<openai-compatible-api>/v1
-export LLM_GREP_MODEL=<a-fast-and-affordable-model>
+export VIBEGREP_API_KEY=<your-api-key>
+export VIBEGREP_BASE_URL=https://<openai-compatible-api>/v1
+export VIBEGREP_MODEL=<a-fast-and-affordable-model>
 ```
 
 ## Usage
 
 ```bash
-llmgrep "security vulnerabilities" src/
-llmgrep "error handling" . -g "*.py"
-llmgrep "authentication logic" src/ --depth 2 -j 5
+vibegrep "security vulnerabilities" src/
+vibegrep "error handling" . -g "*.py"
+vibegrep "authentication logic" src/ --depth 2 -j 5
 ```
 
 ### Options
@@ -32,7 +32,7 @@ PATH                  search path (default: .)
 --depth 1|2           directory depth (default: 1)
 -j NUM, --threads NUM concurrent requests (default: 10)
 -g GLOB, --glob GLOB  file filter (e.g. '*.py')
---model MODEL         override LLM_GREP_MODEL
+--model MODEL         override VIBEGREP_MODEL
 --dry-run             preview batching without calling API
 ```
 
